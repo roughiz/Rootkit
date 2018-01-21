@@ -1,0 +1,1 @@
+cmd_/home/roughiz/MyGit/Rootkit/rt_test/t2/rooty.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/roughiz/MyGit/Rootkit/rt_test/t2/rooty.ko /home/roughiz/MyGit/Rootkit/rt_test/t2/rooty.o /home/roughiz/MyGit/Rootkit/rt_test/t2/rooty.mod.o

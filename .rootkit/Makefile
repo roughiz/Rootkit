@@ -1,5 +1,5 @@
 
-obj-m += rooty.o
+obj-m += my_rootkit.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
